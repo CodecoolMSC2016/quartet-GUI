@@ -5,18 +5,34 @@ import framework.Hand;
 
 import java.util.List;
 
-/**
- * Created by trixi on 2017.02.28..
- */
 public class QuartettHand extends Hand
 {
-    private List<QuartettCard> cards;
+    private List<QuartettCard> quartettCards;
 
-    public void addCardToBottom() {}
-
-    public Card getTopCard()
+    public QuartettHand(List<QuartettCard> cards)
     {
-        return null;
+        this.quartettCards = cards;
     }
 
+    public List<QuartettCard> getCards()
+    {
+        return quartettCards;
+    }
+
+    @Override
+    public void addCard(Card card)
+    {
+        quartettCards.add((QuartettCard)card);
+    }
+
+    public QuartettCard getTopCard()
+    {
+        return quartettCards.get(0);
+    }
+
+    @Override
+    public String toString()
+    {
+        // ez nem a QuartettCard-ba kell inkább?
+    }
 }

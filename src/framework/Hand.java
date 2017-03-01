@@ -4,14 +4,14 @@ import framework.Card;
 
 import java.util.List;
 
-/**
- * Created by trixi on 2017.02.28..
- */
 public abstract class Hand
 {
-        private List<Card> cards;
+        protected List<Card> cards;
 
-        public abstract Card getCard();
+        public List<Card> getCard() {
+                return cards;
+        }
+
+        public abstract void addCard(Card card);
         public abstract String toString();
-        public abstract void addCard();
 }
