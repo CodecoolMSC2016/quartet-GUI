@@ -78,6 +78,18 @@ public class QuartettCard extends Card
         return description;
     }
 
+    @Override
+    public String toString()
+    {
+        System.out.println("********************");
+        System.out.println("Name of the card:   " + getName());
+        System.out.println("Description:    " + getDescription());
+        System.out.println("********************");
+        System.out.println("Power:  " + power);
+        System.out.println("Intelligence:  " + intelligence);
+        System.out.println("Reflex:  " + reflex);
+        System.out.println("********************");
 
+    }
 
 }

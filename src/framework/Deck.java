@@ -2,7 +2,7 @@ package framework;
 
 import framework.Card;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -10,8 +10,19 @@ import java.util.Set;
  */
 public abstract class Deck
 {
-    private HashMap<String, Card> cards;
+    private ArrayList<Card> cards;
 
-    public abstract void addCard();
-    public abstract Set shuffleCards();
+    public Deck(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public  void addCard(Card card){
+        cards.add(card);
+    }
+
+    public abstract void shuffleCards();
 }
