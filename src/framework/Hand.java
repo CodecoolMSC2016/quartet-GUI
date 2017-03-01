@@ -13,5 +13,5 @@ public abstract class Hand
         }
 
         public abstract void addCard(Card card);
-        public abstract String toString();
+
 }
