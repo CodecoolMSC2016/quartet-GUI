@@ -3,31 +3,16 @@ package quartettgame;
 import framework.Card;
 import framework.Hand;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuartettHand extends Hand
 {
-    private List<QuartettCard> quartettCards;
 
-    public QuartettHand(List<QuartettCard> cards)
-    {
-        this.quartettCards = cards;
-    }
 
-    public List<QuartettCard> getCards()
+    public Card getTopCard()
     {
-        return quartettCards;
-    }
-
-    @Override
-    public void addCard(Card card)
-    {
-        quartettCards.add((QuartettCard)card);
-    }
-
-    public QuartettCard getTopCard()
-    {
-        return quartettCards.get(0);
+        return cards.get(0);
     }
 
 }

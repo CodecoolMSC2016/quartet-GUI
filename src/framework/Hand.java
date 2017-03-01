@@ -2,21 +2,34 @@ package framework;
 
 import framework.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Hand
 {
         protected List<Card> cards;
 
-        public Hand(List<Card>  cards)
+        public Hand()
         {
-            this.cards = cards;
+            cards = new ArrayList<Card>();
         }
 
         public List<Card> getCard() {
                 return cards;
         }
 
-        public abstract void addCard(Card card);
+
+
+        public void addCard(Card card)
+        {
+                cards.add(card);
+        }
+
+        public void addCard(ArrayList<Card> card) {
+
+                cards.addAll(card);
+
+        }
+
 
 }
