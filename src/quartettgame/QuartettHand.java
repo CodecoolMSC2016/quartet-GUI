@@ -13,4 +13,8 @@ public class QuartettHand extends Hand
         return cards.get(0);
     }
 
+    public void removeTopCard(){
+        cards.remove(0);
+    }
+
 }

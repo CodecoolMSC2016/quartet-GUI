@@ -24,6 +24,7 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
 
     public QuartettDeckBuilder(String csvfile) {
         this.csvfile = csvfile;
+        dataList = new ArrayList<>();
     }
 
     @Override
@@ -56,9 +57,9 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
 
         name = (String) row.get(NAME);
         description = (String) row.get(DESCRIPTION);
-        power = findEnum(((int)row.get(POWER)));
-        intelligence = findEnum(((int)row.get(INTELLIGENCE)));
-        reflex = findEnum(((int)row.get(REFLEX)));
+        power = findEnum(Integer.parseInt((String)row.get(POWER)));
+        intelligence = findEnum((Integer.parseInt((String)row.get(INTELLIGENCE))));
+        reflex = findEnum(Integer.parseInt((String)row.get(REFLEX)));
         Card newCard = new QuartettCard(name, description, power, intelligence, reflex);
         return newCard;
 
@@ -68,7 +69,6 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
     public void parseFile()
     {
         BufferedReader br;
-        List<List<String>> dataList = new ArrayList<>();
         String line = "", csvSplitby = ",";
         try
         {

@@ -14,6 +14,7 @@ public class QuartettCard extends Card
     private AttributeLevel intelligence;
     private AttributeLevel reflex;
 
+
     public QuartettCard(String name, String description, AttributeLevel power, AttributeLevel intelligence, AttributeLevel reflex) {
         super(name);
         this.description = description;
@@ -21,8 +22,17 @@ public class QuartettCard extends Card
         this.intelligence = intelligence;
         this.reflex = reflex;
     }
+    public int getPowerLevel() {
+        return power.getValue();
+    }
+    public int getReflexLevel() {
+        return reflex.getValue();
+    }
+    public int getIntelligenceLevel() {
+        return intelligence.getValue();
+    }
 
-    private class PowerComparator implements Comparator<QuartettCard>{
+    public static class PowerComparator implements Comparator<QuartettCard>{
 
         @Override
         public int compare(QuartettCard firstCard, QuartettCard secondCard) {
@@ -38,7 +48,7 @@ public class QuartettCard extends Card
         }
     }
 
-    private class IntelligenceComparator implements Comparator<QuartettCard>{
+    public static class IntelligenceComparator implements Comparator<QuartettCard>{
 
         @Override
         public int compare(QuartettCard firstCard, QuartettCard secondCard) {
@@ -53,7 +63,7 @@ public class QuartettCard extends Card
             return 0;
         }
     }
-    private class ReflexComparator implements Comparator<QuartettCard>{
+    public static  class ReflexComparator implements Comparator<QuartettCard>{
 
         @Override
         public int compare(QuartettCard firstCard, QuartettCard secondCard) {
@@ -89,7 +99,7 @@ public class QuartettCard extends Card
         System.out.println("Intelligence:  " + intelligence);
         System.out.println("Reflex:  " + reflex);
         System.out.println("********************");
-
+        return null;
     }
 
 }

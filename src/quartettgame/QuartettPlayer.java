@@ -14,19 +14,25 @@ import java.util.Scanner;
 public class QuartettPlayer extends Player
 {
     private Card topCard;
+    private QuartettHand hand;
 
-    public QuartettPlayer(String name, Hand hand) {
-        super(name,hand);
+
+    public QuartettPlayer(String name, QuartettHand hand) {
+        super(name);
+        this.hand = hand;
     }
 
+    public QuartettHand getHand() {
+        return hand;
+    }
     public int checkNumberOfCards()
     {
        return hand.getCard().size();
     }
 
-    public void showCard()
+    public Card showCard()
     {
-        topCard =((QuartettHand) hand).getTopCard();
+       return topCard =((QuartettHand) hand).getTopCard();
     }
 
     public String pickAttribute() {
