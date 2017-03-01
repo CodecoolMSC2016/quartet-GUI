@@ -8,6 +8,11 @@ public abstract class Hand
 {
         protected List<Card> cards;
 
+        public Hand(List<Card>  cards)
+        {
+            this.cards = cards;
+        }
+
         public List<Card> getCard() {
                 return cards;
         }
