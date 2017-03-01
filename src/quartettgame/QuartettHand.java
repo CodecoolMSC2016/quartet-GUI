@@ -30,9 +30,4 @@ public class QuartettHand extends Hand
         return quartettCards.get(0);
     }
 
-    @Override
-    public String toString()
-    {
-        // ez nem a QuartettCard-ba kell inkább?
-    }
 }
