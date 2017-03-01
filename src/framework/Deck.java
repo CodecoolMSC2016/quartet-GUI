@@ -12,8 +12,8 @@ public abstract class Deck
 {
     private ArrayList<Card> cards;
 
-    public Deck(ArrayList<Card> cards) {
-        this.cards = cards;
+    public Deck() {
+        this.cards = new ArrayList<>();
     }
 
     public ArrayList<Card> getCards() {

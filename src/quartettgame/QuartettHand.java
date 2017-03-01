@@ -3,8 +3,6 @@ package quartettgame;
 import framework.Card;
 import framework.Hand;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class QuartettHand extends Hand
 {

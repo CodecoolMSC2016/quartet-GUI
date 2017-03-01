@@ -1,7 +1,5 @@
 package framework;
 
-import framework.Card;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,7 @@ public abstract class Hand
 
         public Hand()
         {
-            cards = new ArrayList<Card>();
+            cards = new ArrayList<>();
         }
 
         public List<Card> getCard() {
