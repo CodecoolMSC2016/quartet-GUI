@@ -16,5 +16,13 @@ public abstract class Player
         this.hand = hand;
     }
 
+    public Hand getHand() {
+        return hand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public abstract void showCard();
 }
