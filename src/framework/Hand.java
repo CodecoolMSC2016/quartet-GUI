@@ -11,7 +11,7 @@ public abstract class Hand
 {
         private List<Card> cards;
 
-        public abstract Card getCard();
+        public abstract List<Card> getCard();
         public abstract String toString();
         public abstract void addCard();
 }
