@@ -32,7 +32,7 @@ public class QuartettPlayer extends Player
     public String pickAttribute() {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Pick Attribute(P, I, R): ");
+        System.out.print("Pick Attribute(P -> Power, I -> Intelligence R -> Reflex): ");
         String [] correctInput= {"P","I","R",} ;
         String userInput = "";
         while (true){
@@ -41,7 +41,7 @@ public class QuartettPlayer extends Player
             userInput = userInput.toUpperCase();
             if(Arrays.asList(correctInput).contains(userInput))break;
             System.out.println("Wrong input");
-            System.out.println("Correct inputs: S -> Strength, I -> Intelligence R -> Reflex");
+            System.out.println("Correct inputs: P -> Power, I -> Intelligence R -> Reflex");
 
         }
         return userInput;
