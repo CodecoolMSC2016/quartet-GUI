@@ -15,4 +15,6 @@ public abstract class Card
         return name;
     }
 
+    public abstract String toString();
+
 }
