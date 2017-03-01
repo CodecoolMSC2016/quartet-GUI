@@ -14,7 +14,17 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
 {
     private List<List<String>> dataList;
     private String csvfile = "masterCrokCards.csv";
-    private BufferedReader br;
+    private final int NAME = 0;
+    private final int DESCRIPTION = 1;
+    private final int POWER = 2;
+    private final int INTELLIGENCE= 3;
+    private final int REFLEX = 4;
+
+
+
+    public QuartettDeckBuilder(String csvfile) {
+        this.csvfile = csvfile;
+    }
 
     @Override
     public Deck buildDeck()
@@ -44,10 +54,11 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
         String name, description;
         AttributeLevel power, intelligence, reflex;
 
-        name = (String) row.get(0); description = (String) row.get(1);
-        power = findEnum(((int)row.get(2)));
-        intelligence = findEnum(((int)row.get(3)));
-        reflex = findEnum(((int)row.get(4)));
+        name = (String) row.get(NAME);
+        description = (String) row.get(DESCRIPTION);
+        power = findEnum(((int)row.get(POWER)));
+        intelligence = findEnum(((int)row.get(INTELLIGENCE)));
+        reflex = findEnum(((int)row.get(REFLEX)));
         Card newCard = new QuartettCard(name, description, power, intelligence, reflex);
         return newCard;
 
@@ -56,6 +67,7 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
     @Override
     public void parseFile()
     {
+        BufferedReader br;
         List<List<String>> dataList = new ArrayList<>();
         String line = "", csvSplitby = ",";
         try
