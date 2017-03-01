@@ -7,10 +7,14 @@ import framework.Hand;
  */
 public abstract class Player
 {
-    private String name;
-    private Hand hand;
+    protected String name;
+    protected Hand hand;
 
-    public Player(String name) {
+    public Player(String name, Hand hand) {
+
         this.name = name;
+        this.hand = hand;
     }
+
+    public abstract void showCard();
 }

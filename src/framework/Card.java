@@ -3,7 +3,7 @@ package framework;
 /**
  * Created by trixi on 2017.02.28..
  */
-public abstract class Card implements Comparable
+public abstract class Card
 {
     private String name;
 
@@ -14,10 +14,5 @@ public abstract class Card implements Comparable
     public String getName() {
         return name;
     }
-
-    public abstract boolean equals(Card card);
-    public abstract int hashCode();
-    public abstract int compareTo(Card card);
-
 
 }
