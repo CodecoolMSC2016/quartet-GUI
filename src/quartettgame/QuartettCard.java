@@ -2,27 +2,71 @@ package quartettgame;
 
 import framework.Card;
 
+import java.util.Comparator;
+
 /**
  * Created by trixi on 2017.02.28..
  */
 public class QuartettCard extends Card
 {
-    //private String name;
     private String description;
-    private Enum enums1;
-    private Enum enums2;
-    private Enum enums3;
+    private AttributeLevel power;
+    private AttributeLevel intelligence;
+    private AttributeLevel reflex;
 
-    public QuartettCard(String name) {
-        super(name);
-    }
-
-    public QuartettCard(String name, String description, Enum enums1, Enum enums2, Enum enums3) {
+    public QuartettCard(String name, String description, AttributeLevel power, AttributeLevel intelligence, AttributeLevel reflex) {
         super(name);
         this.description = description;
-        this.enums1 = enums1;
-        this.enums2 = enums2;
-        this.enums3 = enums3;
+        this.power = power;
+        this.intelligence = intelligence;
+        this.reflex = reflex;
+    }
+
+    private class PowerComparator implements Comparator<QuartettCard>{
+
+        @Override
+        public int compare(QuartettCard firstCard, QuartettCard secondCard) {
+            int firsCardPower = firstCard.power.getValue();
+            int secondCardPower = secondCard.power.getValue();
+            if (firsCardPower > secondCardPower){
+                return 1;
+            }
+            if(secondCardPower > firsCardPower){
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    private class IntelligenceComparator implements Comparator<QuartettCard>{
+
+        @Override
+        public int compare(QuartettCard firstCard, QuartettCard secondCard) {
+            int firsCardIntelligence = firstCard.intelligence.getValue();
+            int secondCardIntelligence = secondCard.intelligence.getValue();
+            if (firsCardIntelligence > secondCardIntelligence){
+                return 1;
+            }
+            if(secondCardIntelligence > firsCardIntelligence){
+                return -1;
+            }
+            return 0;
+        }
+    }
+    private class ReflexComparator implements Comparator<QuartettCard>{
+
+        @Override
+        public int compare(QuartettCard firstCard, QuartettCard secondCard) {
+            int firsCardReflex = firstCard.reflex.getValue();
+            int secondCardReflex = secondCard.reflex.getValue();
+            if (firsCardReflex > secondCardReflex){
+                return 1;
+            }
+            if(secondCardReflex > firsCardReflex){
+                return -1;
+            }
+            return 0;
+        }
     }
 
     @Override
@@ -34,23 +78,6 @@ public class QuartettCard extends Card
         return description;
     }
 
-    @Override
-    public boolean equals(Card card) {
-        return false;
-    }
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
 
-    @Override
-    public int compareTo(Card card) {
-        return 0;
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 }
