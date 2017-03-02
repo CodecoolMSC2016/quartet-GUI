@@ -2,6 +2,7 @@ package quartettgame;
 
 import framework.*;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -40,7 +41,9 @@ public class QuartettGame implements Game
     }
     @Override
     public void run() {
+        Scanner scan = new Scanner(System.in);
         int rounds = 1;
+        String chosenAttr;
         createPlayers();
         quartetDeck.shuffleCards();
         dealCards();
@@ -50,10 +53,17 @@ public class QuartettGame implements Game
             System.out.println("Current player: " + lastWinner.getName());
             System.out.println((lastWinner.showCard()));
             gatherCards();
-            lastWinner = decideWinner(lastWinner.pickAttribute(), lastWinner);
-            giveCardsToWinner(lastWinner);
+            chosenAttr = lastWinner.pickAttribute();
             printCards();
+            lastWinner = decideWinner(chosenAttr, lastWinner);
+            giveCardsToWinner(lastWinner);
+            cardsInPlay.clear();
             rounds++;
+            System.out.println("Press any key to continue.");
+            scan.nextLine();
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+
 
         }while (checkWinCondition());
         System.out.println(winnerOfTheGame().getName());
@@ -61,14 +71,13 @@ public class QuartettGame implements Game
     }
 
     private void printCards(){
+        System.out.println("Every card in this round: \n");
         for (QuartettCard card: cardsInPlay.keySet()){
             System.out.println("--------------------");
             System.out.println("--------------------");
             System.out.println(cardsInPlay.get(card).getName());
             System.out.println(card);
         }
-        cardsInPlay.clear();
-
     }
     private boolean checkWinCondition(){
         for (QuartettPlayer player: playerArray){
@@ -148,7 +157,10 @@ public class QuartettGame implements Game
         }
         winningCard = cardList.get(cardList.size()-1);
         winningPlayer = cardsInPlay.get(winningCard);
+        System.out.println("--------------------");
         System.out.println("Winner of this round: " + winningPlayer.getName());
+        System.out.println("Winning card: ");
+        System.out.println(winningCard);
         return winningPlayer;
     }
 
