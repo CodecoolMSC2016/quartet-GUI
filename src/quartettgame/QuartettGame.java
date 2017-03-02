@@ -15,8 +15,8 @@ public class QuartettGame implements Game
     private Deck quartetDeck;
     private QuartettPlayer[] playerArray;
     private int numOfPlayers;
-    private List<Card> cardsFromTie;
-    private Map<Card, QuartettPlayer> cardsInPlay;
+    private List<QuartettCard> cardsFromTie;
+    private Map<QuartettCard, QuartettPlayer> cardsInPlay;
 
     public QuartettGame(QuartettDeckBuilder b, int numOfPlayers) {
         cardsFromTie = new ArrayList<>();
@@ -40,19 +40,34 @@ public class QuartettGame implements Game
     }
     @Override
     public void run() {
+        int rounds = 1;
         createPlayers();
         quartetDeck.shuffleCards();
         dealCards();
         QuartettPlayer lastWinner = pickStaringPlayer();
-        while (checkWinCondition()){
+        do {
+            System.out.println("R O U N D : " + rounds);
             System.out.println("Current player: " + lastWinner.getName());
             System.out.println((lastWinner.showCard()));
             gatherCards();
-            lastWinner = decideWinner(lastWinner.pickAttribute());
-            System.out.println("Winner of this round: " + lastWinner.getName());
+            lastWinner = decideWinner(lastWinner.pickAttribute(), lastWinner);
             giveCardsToWinner(lastWinner);
+            printCards();
+            rounds++;
 
+        }while (checkWinCondition());
+        System.out.println(winnerOfTheGame().getName());
+
+    }
+
+    private void printCards(){
+        for (QuartettCard card: cardsInPlay.keySet()){
+            System.out.println("--------------------");
+            System.out.println("--------------------");
+            System.out.println(cardsInPlay.get(card).getName());
+            System.out.println(card);
         }
+        cardsInPlay.clear();
 
     }
     private boolean checkWinCondition(){
@@ -73,51 +88,74 @@ public class QuartettGame implements Game
                 winner.getHand().addCard(card);
             }
         }
-        cardsInPlay.clear();
-
     }
 
-    private void checkTie(List<QuartettCard> cardList, String attribute){
+    public QuartettPlayer winnerOfTheGame(){
+        QuartettPlayer winner = playerArray[0];
+        for (QuartettPlayer p: playerArray){
+            if (p.checkNumberOfCards() > winner.checkNumberOfCards()){
+                winner = p;
+            }
+        }
+        return winner;
+    }
+
+    private boolean checkTie(List<QuartettCard> cardList, String attribute){
+        QuartettCard firstCard = cardList.get(cardList.size()-1);
+        QuartettCard secondCard = cardList.get(cardList.size()-2);
         switch (attribute){
             case "P":
-                if(cardList.get(0).getPowerLevel() == cardList.get(1).getPowerLevel()){
-                    cardsFromTie = new ArrayList<>(cardList);
+                if(firstCard.getPowerLevel() == secondCard.getPowerLevel()){
+                    return true;
                 }
             case "I":
-                if(cardList.get(0).getIntelligenceLevel() == cardList.get(1).getIntelligenceLevel()){
-                    cardsFromTie = new ArrayList<>(cardList);
+                if(firstCard.getIntelligenceLevel() == secondCard.getIntelligenceLevel()){
+                    return true;
                 }
             case "R":
-                if(cardList.get(0).getReflexLevel() == cardList.get(1).getReflexLevel()){
-                    cardsFromTie = new ArrayList<>(cardList);
+                if(firstCard.getReflexLevel() == secondCard.getReflexLevel()){
+                    return true;
                 }
         }
+        return false;
     }
 
-    private QuartettPlayer decideWinner(String input){
-        List cardList = new ArrayList();
+    private QuartettPlayer decideWinner(String input, QuartettPlayer lastWinner){
+        boolean tie = false;
+        List<QuartettCard> cardList = new ArrayList();
+        QuartettPlayer winningPlayer;
+        QuartettCard winningCard;
         cardList.addAll(cardsInPlay.keySet());
         switch (input){
             case "P":
                 cardList.sort(new QuartettCard.PowerComparator());
-                checkTie(cardList, "P");
+                tie = checkTie(cardList, "P");
                 break;
             case "I":
                 cardList.sort(new QuartettCard.IntelligenceComparator());
-                checkTie(cardList, "I");
+                tie = checkTie(cardList, "I");
                 break;
             case "R":
                 cardList.sort(new QuartettCard.ReflexComparator());
-                checkTie(cardList, "R");
+                tie = checkTie(cardList, "R");
                 break;
         }
-        return cardsInPlay.get(cardList.get(0));
+
+        if (tie){
+            System.out.println("There was a tie, collecting cards now for the next round.");
+            cardsFromTie = cardList;
+            return lastWinner;
+        }
+        winningCard = cardList.get(cardList.size()-1);
+        winningPlayer = cardsInPlay.get(winningCard);
+        System.out.println("Winner of this round: " + winningPlayer.getName());
+        return winningPlayer;
     }
 
     private void gatherCards(){
         for (QuartettPlayer player: playerArray){
-            cardsInPlay.put(player.showCard(), player);
-            ((QuartettHand) player.getHand()).removeTopCard();
+            cardsInPlay.put((QuartettCard)player.showCard(), player);
+            player.getHand().removeTopCard();
         }
     }
 
