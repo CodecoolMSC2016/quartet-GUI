@@ -1,1 +1,0 @@
-# quartett-game-java-BAT
