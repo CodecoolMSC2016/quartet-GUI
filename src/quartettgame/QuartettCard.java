@@ -91,15 +91,15 @@ public class QuartettCard extends Card
     @Override
     public String toString()
     {
-        System.out.println("********************");
-        System.out.println("Name of the card:   " + getName());
-        System.out.println("Description:    " + getDescription());
-        System.out.println("********************");
-        System.out.println("Power:  " + power);
-        System.out.println("Intelligence:  " + intelligence);
-        System.out.println("Reflex:  " + reflex);
-        System.out.println("********************");
-        return null;
+        return "--------------------\n" +
+                "Name of the card:  " + getName() + "\n" +
+                "Description:   " + getDescription() + "\n" +
+                "--------------------\n" +
+                "Power:  " + getPowerLevel() + "\n" +
+                "Intelligence:  " + getIntelligenceLevel() + "\n" +
+                "Reflex:    " + getReflexLevel() + "\n" +
+                "--------------------\n" +
+                "\n";
     }
 
 }
