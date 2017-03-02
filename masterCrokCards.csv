@@ -1,32 +1,32 @@
-Master Crok,Váratlan csapás,8,7,9
-Bond Crok,Trükkös fordulat,5,6,7
-Devil Crok,Lélekrablás,6,6,6
-Samurai Crok,Első vágás,6,4,8
-Angel Crok,Feltámasztás,3,4,7
-Captain Crok,Nagy ütközet,5,6,3
-Executor Crok,Nincs kegyelem,7,4,3
-Jungle Crok,Dzsungelharc,6,3,5
-Sensei Crok,Tanítás ereje,2,9,3
-Sumo Crok,Lehengerlés,8,5,1
-Pancrator Crok,Tömegverekedés,9,2,3
-Army Crok,Sorozatlövés,3,4,4
-Boy Crok,Pimasz csínytevés,1,4,6
-Cave Crok,Dühöngés,7,1,3
-Funny Crok,Van másik!,1,6,4
-Gladiator Crok,Pajzsharc,5,1,5
-Indian Crok,Felderítés,3,5,3
-Karate Crok,Tigriskarom,2,3,6
-Police Crok,Letartóztatás,4,3,4
-Priest Crok,Ima,2,7,2
-Sheriff Crok,Pisztolypárbaj,3,3,5
-Cyber Crok,Átalakulás,8,4,6
-Dracula Crok,Vérszívás,6,5,7
-Dragon Crok,Sárkánylehelet,9,5,4
-Barbar Crok,Majd a hideg acél,8,1,5
-Boxer Crok,K.O.,5,3,6
-Gangster Crok,Leszámolás,5,4,5
-Knight Crok,Szent védelem,7,3,4
-Prof Crok,Találmány,3,7,4
-Amor Crok,Vak szerelem,2,3,6
-Monster Crok,Hideg rémület,6,1,4
-Yakuza Crok,Elszánt harc,7,2,2
+Master Crok,Váratlan csapás,8,7,9,masterCrok.jpg
+Bond Crok,Trükkös fordulat,5,6,7,bondCrok.jpg
+Devil Crok,Lélekrablás,6,6,6,devilCrok.jpg
+Samurai Crok,Első vágás,6,4,8,samuraiCrok.jpg
+Angel Crok,Feltámasztás,3,4,7,angelCrok.jpg
+Captain Crok,Nagy ütközet,5,6,3,captainCrok.jpg
+Executor Crok,Nincs kegyelem,7,4,3,executorCrok.jpg
+Jungle Crok,Dzsungelharc,6,3,5,jungleCrok.jpg
+Sensei Crok,Tanítás ereje,2,9,3,senseiCrok.jpg
+Sumo Crok,Lehengerlés,8,5,1,sumoCrok.jpg
+Pancrator Crok,Tömegverekedés,9,2,3,pancratorCrok.jpg
+Army Crok,Sorozatlövés,3,4,4,armyCrok.jpg
+Boy Crok,Pimasz csínytevés,1,4,6,boyCrok.jpg
+Cave Crok,Dühöngés,7,1,3,caveCrok.jpg
+Funny Crok,Van másik!,1,6,4,funnyCrok.jpg
+Gladiator Crok,Pajzsharc,5,1,5,gladiatorCrok.jpg
+Indian Crok,Felderítés,3,5,3,indianCrok.jpg
+Karate Crok,Tigriskarom,2,3,6,karateCrok.jpg
+Police Crok,Letartóztatás,4,3,4,policeCrok.jpg
+Priest Crok,Ima,2,7,2,priestCrok.jpg
+Sheriff Crok,Pisztolypárbaj,3,3,5,sheriffCrok.jpg
+Cyber Crok,Átalakulás,8,4,6,cyberCrok.jpg
+Dracula Crok,Vérszívás,6,5,7,draculaCrok.jpg
+Dragon Crok,Sárkánylehelet,9,5,4,dragonCrok.jpg
+Barbar Crok,Majd a hideg acél,8,1,5,barbarCrok.jpg
+Boxer Crok,K.O.,5,3,6,boxerCrok.jpg
+Gangster Crok,Leszámolás,5,4,5,gangsterCrok.jpg
+Knight Crok,Szent védelem,7,3,4,knightCrok.jpg
+Prof Crok,Találmány,3,7,4,profCrok.jpg
+Amor Crok,Vak szerelem,2,3,6,amorCrok.jpg
+Monster Crok,Hideg rémület,6,1,4,monsterCrok.jpg
+Yakuza Crok,Elszánt harc,7,2,2,yakuzaCrok.jpg
