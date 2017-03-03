@@ -1,8 +1,8 @@
 package quartettgame;
 
 import framework.*;
+import gui.MasterCrokGUI;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -10,25 +10,29 @@ import java.util.*;
  */
 public class QuartettGame implements Game
 {
-    /* meghatározza a framework.Player -eket
-    *  felépíti a játékteret
-    */
     private Deck quartetDeck;
     private QuartettPlayer[] playerArray;
     private int numOfPlayers;
+    private QuartettCard currentBestCard;
     private List<QuartettCard> cardsFromTie;
     private Map<QuartettCard, QuartettPlayer> cardsInPlay;
+    private MasterCrokGUI gui;
+    private QuartettPlayer lastWinner;
+    private boolean stopExecution;
 
-    public QuartettGame(QuartettDeckBuilder b, int numOfPlayers) {
+    public QuartettGame(QuartettDeckBuilder b, int numOfPlayers, MasterCrokGUI gui) {
         cardsFromTie = new ArrayList<>();
         quartetDeck = b.buildDeck();
-        cardsInPlay = new HashMap<>();
         playerArray = new QuartettPlayer[numOfPlayers];
         this.numOfPlayers = numOfPlayers;
+        this.gui = gui;
+    }
+
+    public QuartettCard getCurrentBestCard() {
+        return currentBestCard;
     }
 
     private void createPlayers(){
-        QuartettPlayer lasWinner = null;
         for (int i = 0; i < playerArray.length; i++){
             playerArray[i] = new QuartettPlayer("Player " + (i+1), new QuartettHand());
         }
@@ -39,46 +43,54 @@ public class QuartettGame implements Game
         Random random = new Random();
         return playerArray[random.nextInt(numOfPlayers)];
     }
-    @Override
-    public void run() {
-        Scanner scan = new Scanner(System.in);
-        int rounds = 1;
-        String chosenAttr;
+
+    public void initGame(){
         createPlayers();
         quartetDeck.shuffleCards();
+        lastWinner = pickStaringPlayer();
         dealCards();
-        QuartettPlayer lastWinner = pickStaringPlayer();
+        gui.buildMainWindow();
+        gui.buildSecondaryWindow();
+        run();
+    }
+    @Override
+    public void run() {
+        QuartettCard currentCard;
         do {
-            System.out.println("R O U N D : " + rounds);
-            System.out.println("Current player: " + lastWinner.getName());
-            System.out.println((lastWinner.showCard()));
-            gatherCards();
-            chosenAttr = lastWinner.pickAttribute();
-            printCards();
-            lastWinner = decideWinner(chosenAttr, lastWinner);
-            giveCardsToWinner(lastWinner);
-            cardsInPlay.clear();
-            rounds++;
-            System.out.println("Press any key to continue.");
-            scan.nextLine();
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-
-
-        }while (checkWinCondition());
-        System.out.println(winnerOfTheGame().getName());
-
+            try{
+                currentCard = (QuartettCard)(lastWinner.getHand().getTopCard());
+                if (!checkWinCondition()){
+                    gui.goGUI(winnerOfTheGame());
+                    return;
+                }
+                gui.goGUI(currentCard.getPicturePath(), lastWinner);
+            }catch (NullPointerException e){
+                return;
+            }
+            stopExecution = false;
+            while (!stopExecution) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }while(checkWinCondition());
+        gui.goGUI(winnerOfTheGame());
     }
 
-    private void printCards(){
-        System.out.println("Every card in this round: \n");
-        for (QuartettCard card: cardsInPlay.keySet()){
-            System.out.println("--------------------");
-            System.out.println("--------------------");
-            System.out.println(cardsInPlay.get(card).getName());
-            System.out.println(card);
-        }
+    public void setStopExecution(boolean stopExecution) {
+        this.stopExecution =  stopExecution;
     }
+
+    public Map<QuartettCard, QuartettPlayer> getCardsInPlay() {
+        return cardsInPlay;
+    }
+
+    public void setLastWinner(QuartettPlayer player){
+        lastWinner = player;
+    }
+
     private boolean checkWinCondition(){
         for (QuartettPlayer player: playerArray){
             if (player.checkNumberOfCards() == 0){
@@ -87,7 +99,7 @@ public class QuartettGame implements Game
         }
         return true;
     }
-    private void giveCardsToWinner(QuartettPlayer winner){
+    public void giveCardsToWinner(QuartettPlayer winner){
         if (cardsFromTie.size() == 0){
             for (Card card: cardsInPlay.keySet()) {
                 winner.getHand().addCard(card);
@@ -117,23 +129,25 @@ public class QuartettGame implements Game
                 if(firstCard.getPowerLevel() == secondCard.getPowerLevel()){
                     return true;
                 }
+                break;
             case "I":
                 if(firstCard.getIntelligenceLevel() == secondCard.getIntelligenceLevel()){
                     return true;
                 }
+                break;
             case "R":
                 if(firstCard.getReflexLevel() == secondCard.getReflexLevel()){
                     return true;
                 }
+                break;
         }
         return false;
     }
 
-    private QuartettPlayer decideWinner(String input, QuartettPlayer lastWinner){
+    public QuartettPlayer decideWinner(String input){
         boolean tie = false;
         List<QuartettCard> cardList = new ArrayList();
         QuartettPlayer winningPlayer;
-        QuartettCard winningCard;
         cardList.addAll(cardsInPlay.keySet());
         switch (input){
             case "P":
@@ -153,18 +167,20 @@ public class QuartettGame implements Game
         if (tie){
             System.out.println("There was a tie, collecting cards now for the next round.");
             cardsFromTie = cardList;
+            currentBestCard = null;
             return lastWinner;
         }
-        winningCard = cardList.get(cardList.size()-1);
-        winningPlayer = cardsInPlay.get(winningCard);
+        currentBestCard = cardList.get(cardList.size()-1);
+        winningPlayer = cardsInPlay.get(currentBestCard);
         System.out.println("--------------------");
         System.out.println("Winner of this round: " + winningPlayer.getName());
         System.out.println("Winning card: ");
-        System.out.println(winningCard);
+        System.out.println(currentBestCard);
         return winningPlayer;
     }
 
-    private void gatherCards(){
+    public void gatherCards(){
+        cardsInPlay = new HashMap<>();
         for (QuartettPlayer player: playerArray){
             cardsInPlay.put((QuartettCard)player.showCard(), player);
             player.getHand().removeTopCard();
@@ -179,6 +195,6 @@ public class QuartettGame implements Game
                  p.getHand().addCard(currentDeck.get(index));
                 index++;
             }
-        };
+        }
     }
 }

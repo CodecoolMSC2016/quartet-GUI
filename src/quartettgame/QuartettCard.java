@@ -13,10 +13,18 @@ public class QuartettCard extends Card
     private AttributeLevel power;
     private AttributeLevel intelligence;
     private AttributeLevel reflex;
+    private String picturePath;
 
 
-    public QuartettCard(String name, String description, AttributeLevel power, AttributeLevel intelligence, AttributeLevel reflex) {
+    public QuartettCard(String name,
+                        String description,
+                        AttributeLevel power,
+                        AttributeLevel intelligence,
+                        AttributeLevel reflex,
+                        String picturePath)
+    {
         super(name);
+        this.picturePath = "/home/imre_meszesan/IdeaProjects/quartet-GUI/src/pictures/" + picturePath;
         this.description = description;
         this.power = power;
         this.intelligence = intelligence;
@@ -30,6 +38,10 @@ public class QuartettCard extends Card
     }
     public int getIntelligenceLevel() {
         return intelligence.getValue();
+    }
+
+    public String getPicturePath() {
+        return picturePath;
     }
 
     public static class PowerComparator implements Comparator<QuartettCard>{

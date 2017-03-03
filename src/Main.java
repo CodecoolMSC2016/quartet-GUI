@@ -1,4 +1,4 @@
-import framework.Game;
+import gui.MasterCrokGUI;
 import quartettgame.QuartettDeckBuilder;
 import quartettgame.QuartettGame;
 
@@ -8,7 +8,9 @@ import quartettgame.QuartettGame;
 public class Main
 {
     public static void main(String[] args) {
-        Game quartetGame = new QuartettGame(new QuartettDeckBuilder("masterCrokCards.csv"), 3);
-        quartetGame.run();
+        MasterCrokGUI gui = new MasterCrokGUI();
+        QuartettGame quartetGame = new QuartettGame(new QuartettDeckBuilder("masterCrokCards.csv"), 3, gui);
+        gui.addGame(quartetGame);
+        quartetGame.initGame();
     }
 }

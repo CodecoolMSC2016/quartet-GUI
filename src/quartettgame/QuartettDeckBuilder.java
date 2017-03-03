@@ -19,6 +19,7 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
     private final int POWER = 2;
     private final int INTELLIGENCE= 3;
     private final int REFLEX = 4;
+    private final int PICTURE = 5;
 
 
 
@@ -52,7 +53,7 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
     }
     private Card createCard(List row)
     {
-        String name, description;
+        String name, description, picture;
         AttributeLevel power, intelligence, reflex;
 
         name = (String) row.get(NAME);
@@ -60,7 +61,9 @@ public class QuartettDeckBuilder implements DeckBuilder, Parser
         power = findEnum(Integer.parseInt((String)row.get(POWER)));
         intelligence = findEnum((Integer.parseInt((String)row.get(INTELLIGENCE))));
         reflex = findEnum(Integer.parseInt((String)row.get(REFLEX)));
-        Card newCard = new QuartettCard(name, description, power, intelligence, reflex);
+        picture = (String)row.get(PICTURE);
+
+        Card newCard = new QuartettCard(name, description, power, intelligence, reflex, picture);
         return newCard;
 
     }
